@@ -10,8 +10,9 @@ class FileUploadController extends Controller
 {
     public function createForm(){
         return view('file-upload');
-      }
-      public function fileUpload(Request $req){
+    }
+
+    public function fileUpload(Request $req){
         $req->validate([
         'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
         ]);
@@ -26,5 +27,10 @@ class FileUploadController extends Controller
             ->with('success','File has been uploaded.')
             ->with('file', $fileName);
         }
-   }
+    }
+
+    public function listFiles(){
+        $files = File::all();
+        return view('all-files', compact('files'));
+    }
 }

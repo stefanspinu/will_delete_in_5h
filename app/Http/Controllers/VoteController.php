@@ -11,6 +11,18 @@ use Illuminate\Http\Request;
 
 class VoteController extends Controller
 {
+
+    public function showVotes()
+    {
+        $phpCount = Vote::where('choice', 'php')->distinct('user_id')->count('user_id');
+        $javaCount = Vote::where('choice', 'java')->distinct('user_id')->count('user_id');
+        $votes = Vote::all();
+
+        $votesByUser = Vote::with('user')->get();
+
+        return view('votes.showVotes', compact('phpCount', 'javaCount', 'votes', 'votesByUser'));
+    }
+
     public function index()
     {
         $phpCount = Vote::where('choice', 'php')->distinct('user_id')->count('user_id');

@@ -18,13 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('articles', 'App\Http\Controllers\ArticleController');
+Route::resource('/admin/articles', 'App\Http\Controllers\ArticleController')->middleware('auth');
 Auth::routes();
+
+Route::get('/articles', 'App\Http\Controllers\ArticleController@showArticles')->name('allArticle');
+Route::get('/article/{article}', 'App\Http\Controllers\ArticleController@showArticle')->name('singleArticle');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/upload-file', [FileUploadController::class, 'createForm']);
-Route::post('/upload-file', [FileUploadController::class, 'fileUpload'])->name('fileUpload');
+Route::get('/admin/upload-file', [FileUploadController::class, 'createForm'])->name('fileUploadSys');
+Route::post('/admin/upload-file', [FileUploadController::class, 'fileUpload'])->name('fileUpload');
+Route::get('/all-files', [FileUploadController::class, 'listFiles'])->name('listFiles');
 
 use App\Http\Controllers\VoteController;
 
@@ -32,3 +36,4 @@ Route::get('/', [VoteController::class, 'index'])->name('votes.index');
 Route::get('/vote/create', [VoteController::class, 'create'])->name('votes.create');
 Route::post('/vote', [VoteController::class, 'store'])->name('votes.store');
 Route::get('/vote/{vote}', [VoteController::class, 'show'])->name('votes.show');
+Route::get('/admin/votes', [VoteController::class, 'showVotes'])->name('showVotes')->middleware('auth');

@@ -16,13 +16,14 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="{{ route('allArticle') }}" class="nav-link px-2 link-dark">Articles</a></li>
+        <li><a href="{{ route('allArticle') }}" class="nav-link px-2 link-secondary">Articles</a></li>
         <li><a href="{{ route('articles.index') }}" class="nav-link px-2 link-dark">Admin</a></li>
-        <li><a href="{{ route('votes.index') }}" class="nav-link px-2 link-secondary">Vote System</a></li>
+        <li><a href="{{ route('votes.index') }}" class="nav-link px-2 link-dark">Vote System</a></li>
         <li><a href="{{ route('listFiles') }}" class="nav-link px-2 link-dark">File Upload</a></li>
       </ul>
     </header>
   </div>
+
     @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+
+    public function showArticles()
+    {
+        $data['articles'] = Article::orderBy('id', 'desc')->paginate(10);
+        return view('articles.articles', $data);
+    }
+    public function showArticle(string $id)
+    {
+        $data['articles'] = Article::orderBy('id', 'desc')->paginate(3);
+        $where = array('id' => $id);
+        $data['article'] = Article::where($where)->first();
+        return view('articles.article', $data);
+    }
+
     /**
      * Display a listing of the resource.
      */
